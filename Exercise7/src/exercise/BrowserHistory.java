@@ -19,7 +19,7 @@ public class BrowserHistory {
 	BrowserHistory(){
 		historyArrayList = new ArrayList<>();
 		historyLinkedList = new LinkedList<>();
-		
+	
 		historyHashSet = new HashSet<>();
 		historyLinkedHashSet = new LinkedHashSet<>();
 		historyTreeSet = new TreeSet<>();
@@ -39,6 +39,7 @@ public class BrowserHistory {
 		Collections.sort(historyArrayList);
 		Collections.sort(historyLinkedList);
 		
+		
 		ArrayList<String> hashSetList = new ArrayList<>(historyHashSet);
 		Collections.sort(hashSetList);
 		ArrayList<String> linkedHashSetList = new ArrayList<>(historyLinkedHashSet);
@@ -56,6 +57,7 @@ public class BrowserHistory {
 		System.out.println("Size of history linked list :" + historyLinkedList.size());
 		System.out.println("Size of history hash set :" +  historyHashSet.size());
 		System.out.println("Size of history linked hash set :" + historyLinkedHashSet.size());
+		System.out.println("Size of history tree set :" + historyTreeSet.size());
 	}
 	
 	void displaySearchResult(ArrayList<String> urlsWithExtension, String extension, String listName) {
@@ -88,6 +90,9 @@ public class BrowserHistory {
 		
 		historyLinkedHashSet.remove(oldUrl);
 		historyLinkedHashSet.add(correctedUrl);
+		
+		historyTreeSet.remove(oldUrl);
+		historyTreeSet.add(correctedUrl);
 		
 	}
 	
@@ -135,6 +140,15 @@ public class BrowserHistory {
 			displaySearchResult(urlsWithExtension, extension, "linked hash set");
 		}
 		urlsWithExtension.clear();
+		
+		for(String urlString : historyTreeSet) {
+			if(urlString.endsWith(extension)) {
+				urlsWithExtension.add(urlString);
+			}
+		}
+		if(! urlsWithExtension.isEmpty()) {
+			displaySearchResult(urlsWithExtension, extension, "tree set");
+		}
 	}
 	
 	void displayHistory() {
@@ -160,6 +174,12 @@ public class BrowserHistory {
 		while(iterator.hasNext()) {
 			System.out.println(iterator.next());
 		}
+		
+		System.out.println("\tHistory form TreeSet");
+		iterator = historyTreeSet.iterator();
+		while(iterator.hasNext()) {
+			System.out.println(iterator.next());
+		}
 	}
 	
 	
@@ -171,7 +191,7 @@ public class BrowserHistory {
 		historyLinkedList.remove(url);
 		historyHashSet.remove(url);
 		historyLinkedHashSet.remove(url);
-		
+		historyTreeSet.remove(url);
 	}
 	
 	void deleteHistory(String url) {
@@ -180,6 +200,7 @@ public class BrowserHistory {
 		historyLinkedList.remove(url);
 		historyHashSet.remove(url);
 		historyLinkedHashSet.remove(url);
+		historyTreeSet.remove(url);
 	}
 	
 	
