@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
+import java.util.TreeSet;
 
 
 public class BrowserHistory {
@@ -13,29 +14,38 @@ public class BrowserHistory {
 	LinkedList<String> historyLinkedList;
 	HashSet<String> historyHashSet;
 	LinkedHashSet<String> historyLinkedHashSet;
+	TreeSet<String> historyTreeSet;
 	
 	BrowserHistory(){
 		historyArrayList = new ArrayList<>();
 		historyLinkedList = new LinkedList<>();
+		
 		historyHashSet = new HashSet<>();
 		historyLinkedHashSet = new LinkedHashSet<>();
+		historyTreeSet = new TreeSet<>();
+		
 	}
 	
 	void visit(String url) {
 		historyArrayList.add(url);
 		historyLinkedList.add(url);
+		
 		historyHashSet.add(url);
 		historyLinkedHashSet.add(url);
+		historyTreeSet.add(url);
 	}
 	
 	void sort() {
 		Collections.sort(historyArrayList);
 		Collections.sort(historyLinkedList);
+		
 		ArrayList<String> hashSetList = new ArrayList<>(historyHashSet);
 		Collections.sort(hashSetList);
 		ArrayList<String> linkedHashSetList = new ArrayList<>(historyLinkedHashSet);
 		Collections.sort(linkedHashSetList);
 		
+		historyHashSet = new HashSet<>(hashSetList);
+		historyLinkedHashSet = new LinkedHashSet<>(linkedHashSetList);
 		// display
 		
 		displayHistory();
