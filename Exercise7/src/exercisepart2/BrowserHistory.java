@@ -3,7 +3,9 @@ package exercisepart2;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Set;
 
 public class BrowserHistory {
@@ -123,27 +125,23 @@ public class BrowserHistory {
 		}
 		
 		// linked hash map
+
+		
 		searchResult.clear();
-		try {
-			Set<String> keys = urlHistoryLinkedHashMap.keySet();
-			ArrayList<String> urls = new ArrayList<>();
-			for(String key : keys) {
-				
-				urls = urlHistoryLinkedHashMap.get(key);
-				for(String url : urls) {
-					if(url.contains(searchWord)) {
-						searchResult.add(url);
-					}
+		for(Map.Entry<String, ArrayList<String>> mapEntry : urlHistoryLinkedHashMap.entrySet()) {
+			ArrayList<String> urlList = mapEntry.getValue();
+			
+			for(String urlString : urlList) {
+				if(urlString.contains(searchWord)) {
+					searchResult.add(urlString);
 				}
 			}
-			if(searchResult.isEmpty()) {
-				System.out.println("No url found for search word : " + searchWord);
-			}else {
-				System.out.println("Search results are :");
-				System.out.println(searchResult.toString());
-			}
-		}catch (NullPointerException e) {
-			System.out.println("No urls to search");
+		}
+		if(searchResult.isEmpty()) {
+			System.out.println("No url found for search word : " + searchWord);
+		}else {
+			System.out.println("Search results are :");
+			System.out.println(searchResult.toString());
 		}
 		
 	}

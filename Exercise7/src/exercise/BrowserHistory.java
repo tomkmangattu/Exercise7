@@ -91,6 +91,7 @@ public class BrowserHistory {
 		historyLinkedHashSet.remove(oldUrl);
 		historyLinkedHashSet.add(correctedUrl);
 		
+		// tree set
 		historyTreeSet.remove(oldUrl);
 		historyTreeSet.add(correctedUrl);
 		
